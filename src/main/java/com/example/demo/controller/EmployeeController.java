@@ -19,55 +19,55 @@ import com.example.demo.service.EmployeeService;
 @RestController
 @RequestMapping("/api/employees")
 public class EmployeeController {
-	
+
 	private EmployeeService	employeeService;
 
 	public EmployeeController(EmployeeService employeeService) {
 		super();
 		this.employeeService = employeeService;
 	}
-	   
+
 	//Build Create employee RestApi
 	@PostMapping
 	public ResponseEntity<Employee> saveEmployee(@RequestBody Employee employee)
 	{
-		return new ResponseEntity<Employee>(employeeService.savEmployee(employee),HttpStatus.CREATED);
+		return new ResponseEntity<>(employeeService.savEmployee(employee),HttpStatus.CREATED);
 	}
 		//Build get all employees RESTAPI
  	@GetMapping
  	public List<Employee> getAllEmployees(){
  		return employeeService.getAllEmployees();
- 		
+
  	}
- 	
+
  	//Build  get employee by id RESTAPI
  	@GetMapping("{id}")
  	public ResponseEntity<Employee> getEmployeeById(@PathVariable("id") long employeeId){
- 		
- 		return new ResponseEntity<Employee>(employeeService.getEmployeeById(employeeId),HttpStatus.OK);
- 		
+
+ 		return new ResponseEntity<>(employeeService.getEmployeeById(employeeId),HttpStatus.OK);
+
  	}
- 	
- 	
+
+
  // build update employee REST API
  	// http://localhost:8080/api/employees/1
  	@PutMapping("{id}")
  	public ResponseEntity<Employee> updateEmployee(@PathVariable("id") long id
  												  ,@RequestBody Employee employee){
- 		return new ResponseEntity<Employee>(employeeService.updateEmployee(employee, id), HttpStatus.OK);
+ 		return new ResponseEntity<>(employeeService.updateEmployee(employee, id), HttpStatus.OK);
  	}
- 	
- 	
+
+
  // build delete employee REST API
  	// http://localhost:8080/api/employees/1
  	@DeleteMapping("{id}")
  	public ResponseEntity<String> deleteEmployee(@PathVariable("id") long id){
- 		
+
  		// delete employee from DB
  		employeeService.deleteEmployee(id);
- 		
- 		return new ResponseEntity<String>("Employee deleted successfully!.", HttpStatus.OK);
+
+ 		return new ResponseEntity<>("Employee deleted successfully!.", HttpStatus.OK);
  	}
-	
- 	 
+
+
 }
